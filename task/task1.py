@@ -140,18 +140,8 @@ def save_workers(file_name, staff):
 
 
 def validate_json(json_data):
-    schema = {
-        "type": "array",
-        "items": {
-            "type": "object",
-            "properties": {
-                "destination": {"type": "string"},
-                "number": {"type": "number"},
-                "time": {"type": "string"},
-            }
-        },
-    }
-
+    with open("schema.json", "r", encoding="utf-8") as json_schema:
+        schema = json.load(json_schema)
     try:
         validate(instance=json_data, schema=schema)
     except jsonschema.exceptions.ValidationError as err:
